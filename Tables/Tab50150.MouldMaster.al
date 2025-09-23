@@ -229,6 +229,12 @@ table 50150 "Mould Master"
             Caption = 'Mould Category';
             Editable = false;
         }
+        field(33; "Job No."; Code[20])
+        {
+            Caption = 'Job No.';
+            TableRelation = Item."No.";
+        }
+
 
 
 

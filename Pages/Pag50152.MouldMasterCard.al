@@ -27,6 +27,10 @@ page 50152 "Mould Master Card"
                     ToolTip = 'Specifies the value of the Mould Size field.', Comment = '%';
                     Visible = false;
                 }
+                 field("Job No."; Rec."Job No.")
+                {
+                    ToolTip = 'Specifies the value of the Job No field.', Comment = '%';
+                }
                 field("Glass Weight"; Rec."Glass Weight")
                 {
                     ToolTip = 'Specifies the value of the Glass Weight field.', Comment = '%';

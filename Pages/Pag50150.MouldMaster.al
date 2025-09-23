@@ -36,7 +36,7 @@ page 50150 "Mould Master"
                 field("Mould Purchase Date"; Rec."Received Date")
                 {
                     ToolTip = 'Specifies the value of the Mould Purchase Date field.', Comment = '%';
-                }
+                }     
                 field("Machine Center"; Rec."Machine Center")
                 {
                     ToolTip = 'Specifies the value of the Machine Center field.', Comment = '%';
@@ -47,11 +47,11 @@ page 50150 "Mould Master"
                     ToolTip = 'Specifies the value of the Mould Model field.', Comment = '%';
                     Visible = false;
                 }
-                 field("Work Center"; Rec."Work Center")
+                field("Work Center"; Rec."Work Center")
                 {
                     ToolTip = 'Specifies the value of the Work Center field.', Comment = '%';
                 }
-                 field(Manufacturer; Rec.Manufacturer)
+                field(Manufacturer; Rec.Manufacturer)
                 {
                     ToolTip = 'Specifies the value of the Manufacturer field.', Comment = '%';
                 }
@@ -64,6 +64,6 @@ page 50150 "Mould Master"
     }
     trigger OnOpenPage()
     begin
-        Rec.CalcFields("Blank Mould Life (Usage)","Blow Mould Life (Usage)");
+        Rec.CalcFields("Blank Mould Life (Usage)", "Blow Mould Life (Usage)");
     end;
 }
