@@ -36,7 +36,7 @@ page 50150 "Mould Master"
                 field("Mould Purchase Date"; Rec."Received Date")
                 {
                     ToolTip = 'Specifies the value of the Mould Purchase Date field.', Comment = '%';
-                }     
+                }
                 field("Machine Center"; Rec."Machine Center")
                 {
                     ToolTip = 'Specifies the value of the Machine Center field.', Comment = '%';
@@ -59,6 +59,29 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Remarks.', Comment = '%';
                 }
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action(ModuleGearLiftReport)
+            {
+                ApplicationArea = All;
+                Caption = 'Print Module Gear Lift';
+                Image = Report; // Optional icon
+                trigger OnAction()
+                var
+                    MyReportID: Integer;
+                    DocumentNo: Record "Mould Master";
+                begin
+                    MyReportID := Report::MouldGearLiftReport;
+                    DocumentNo.Reset();
+                    DocumentNo.SetRange("PO No.", Rec."PO No.");
+                    If DocumentNo.FindSet() then
+                        Report.RunModal(MyReportID, true, false, DocumentNo);
+                end;
             }
         }
     }
