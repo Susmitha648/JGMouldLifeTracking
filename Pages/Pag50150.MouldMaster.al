@@ -19,19 +19,41 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Mould Id field.', Comment = '%';
                 }
-                field("Mould Name"; Rec."Mould Name")
+                field("Job No."; Rec."Job No.")
                 {
-                    ToolTip = 'Specifies the value of the Mould Name field.', Comment = '%';
-                    Visible = false;
+                    ToolTip = 'Specifies the value of the Job No. field.', Comment = '%';
                 }
-                field("Mould Size"; Rec."Mould Size")
+                field("Blank Mould Life (Expected)"; Rec."Blank Mould Life (Expected)")
                 {
-                    ToolTip = 'Specifies the value of the Mould Size field.', Comment = '%';
-                    Visible = false;
+                    ToolTip = 'Specifies the value of the Blank Mould Life (Expected) field.', Comment = '%';
                 }
-                field("Mould Weight"; Rec."Glass Weight")
+                field("Blow Mould Life (Expected)"; Rec."Blow Mould Life (Expected)")
                 {
-                    ToolTip = 'Specifies the value of the Mould Weight field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Blow Mould Life (Expected) field.', Comment = '%';
+                }
+                 field("Blank Mould Life (Balance)"; Rec."Blank Mould Life (Balance)")
+                {
+                    ToolTip = 'Specifies the value of the Blank Mould Life (Balance) field.', Comment = '%';
+                }
+                 field("Blow Mould Life (Balance)"; Rec."Blow Mould Life (Balance)")
+                {
+                    ToolTip = 'Specifies the value of the Blow Mould Life (Balance) field.', Comment = '%';
+                }
+                 field("Blank Mould Life (Usage)"; Rec."Blank Mould Life (Usage)")
+                {
+                    ToolTip = 'Specifies the value of the Blank Mould Life (Usage) field.', Comment = '%';
+                }
+                 field("Blow Mould Life (Usage)"; Rec."Blow Mould Life (Usage)")
+                {
+                    ToolTip = 'Specifies the value of the Blow Mould Life (Usage) field.', Comment = '%';
+                }
+                 field("Blank Mould Life Usage %"; Rec."Blank Mould Life Usage %")
+                {
+                    ToolTip = 'Specifies the value of the Blank Mould Life Usage % field.', Comment = '%';
+                }
+                 field("Blow Mould Life Usage %"; Rec."Blow Mould Life Usage %")
+                {
+                    ToolTip = 'Specifies the value of the Blow Mould Life Usage % field.', Comment = '%';
                 }
                 field("Mould Purchase Date"; Rec."Received Date")
                 {
@@ -89,4 +111,5 @@ page 50150 "Mould Master"
     begin
         Rec.CalcFields("Blank Mould Life (Usage)", "Blow Mould Life (Usage)");
     end;
+    
 }
