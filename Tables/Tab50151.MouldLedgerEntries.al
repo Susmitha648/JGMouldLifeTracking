@@ -32,6 +32,7 @@ table 50151 "Mould Ledger Entries"
         field(6; "Production Order No."; Code[20])
         {
             Caption = 'Production Order No';
+            TableRelation = "Production Order"."No.";
         }
         field(7; "Quantity"; Decimal)
         {
