@@ -1,29 +1,29 @@
 codeunit 50150 "Subscriber Mould"
 {
-    [EventSubscriber(ObjectType::Table, Database::"Mould Ledger Entries", 'OnAfterValidateEvent', 'Quantity', false, false)]
-    local procedure OnAfterValidateLocationCodePurchase(var Rec: Record "Mould Ledger Entries"; var xRec: Record "Mould Ledger Entries"; CurrFieldNo: Integer)
+    [EventSubscriber(ObjectType::Codeunit, CodeUnit::"Prod. Order Status Management", 'OnAfterTransProdOrder', '', false, false)]
+    local procedure OnAfterTransProdOrder(var FromProdOrder: Record "Production Order"; var ToProdOrder: Record "Production Order")
     var
-    MouldMaster : Record "Mould Master";
-    MouldLedgerEntries : Record "Mould Ledger Entries";
-    BlankQty : Decimal;
-    BlowQty : Decimal;
+        MouldMaster: Record "Mould Master";
+        MouldLedgerEntries: Record "Mould Ledger Entries";
+        MLE: Record "Mould Ledger Entries";
+        BlankQty: Decimal;
+        BlowQty: Decimal;
     begin
-        /*Clear(BlankQty);
-        Clear(BlowQty);
-       If MouldMaster.Get(Rec."PO No.") then begin
-          MouldLedgerEntries.Reset();
-          MouldLedgerEntries.SetRange("PO No.",Rec."PO No.");
-          If MouldLedgerEntries.FindSet() then repeat
-             If MouldLedgerEntries.Type = MouldLedgerEntries.Type::"Press & Blow (PB)" then
-                BlankQty += MouldLedgerEntries.Quantity;
-              If MouldLedgerEntries.Type = MouldLedgerEntries.Type::"Blow & Blow (BB)" then
-                BlowQty += MouldLedgerEntries.Quantity;  
-          until MouldLedgerEntries.Next() = 0;
-          MouldMaster."Blow Mould Life Usage %" := (BlowQty/ MouldMaster."Blow Mould Life (Expected)") * 100;
-          MouldMaster."Blank Mould Life Usage %" := (BlankQty / MouldMaster."Blank Mould Life (Expected)") * 100;
-          MouldMaster."Blank Mould Life (Balance)" := MouldMaster."Blank Mould Life (Expected)" - BlankQty;
-          MouldMaster."Blow Mould Life (Balance)" := MouldMaster."Blow Mould Life (Expected)" - BlowQty;
-          MouldMaster.Modify();
-       end;*/
+        If MouldMaster.Get(FromProdOrder."PO No.") then;
+        MLE.Init();
+        MouldLedgerEntries.SetAscending("Entry No.", false);
+        If MouldLedgerEntries.Findfirst() then
+            MLE."Entry No." := MouldLedgerEntries."Entry No." + 1
+        else
+            MLE."Entry No." := 1;
+        MLE."PO No." := FromProdOrder."PO No.";
+        MLE."Production Order No." := FromProdOrder."No.";
+        MLE."Posting Date" := System.Today();
+        MLE.Quantity := FromProdOrder.Quantity;
+        If MouldMaster.Process = MouldMaster.Process::BB then
+            MLE.Type := MLE.Type::"Blow & Blow (BB)"
+        else
+            MLE.Type := MLE.Type::"Press & Blow (PB)";
+        MLE.Insert();
     end;
 }

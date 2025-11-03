@@ -48,9 +48,12 @@ page 50151 "Mould Ledger Entries"
     }
     trigger OnNewRecord(BelowxRec: Boolean)
     var
-    MouldLedgerEntries : Record "Mould Ledger Entries";
+        MouldLedgerEntries: Record "Mould Ledger Entries";
     begin
-        If MouldLedgerEntries.FindLast() then
-           Rec."Entry No." := MouldLedgerEntries."Entry No." + 1;
-    end; 
+        MouldLedgerEntries.SetAscending("Entry No.", false);
+        If MouldLedgerEntries.Findfirst() then
+            Rec."Entry No." := MouldLedgerEntries."Entry No." + 1
+        else
+            Rec."Entry No." := 1;
+    end;
 }
