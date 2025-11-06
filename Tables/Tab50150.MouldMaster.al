@@ -20,6 +20,8 @@ table 50150 "Mould Master"
         field(5; "Glass Weight"; Decimal)
         {
             Caption = 'Glass Weight';
+            Editable = false;
+            BlankZero = true;
             trigger OnValidate()
             var
                 MouldCategoryMatrix: Record "Mould Category Matrix";
@@ -233,6 +235,13 @@ table 50150 "Mould Master"
         {
             Caption = 'Job No.';
             TableRelation = Item."No.";
+            trigger OnValidate()
+            var
+              Item : Record Item;
+            begin
+               If Item.Get("Job No.") then
+                  Validate("Glass Weight",Item."Net Weight");
+            end;
         }
 
 
