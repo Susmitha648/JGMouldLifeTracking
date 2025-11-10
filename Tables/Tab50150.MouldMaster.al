@@ -243,6 +243,10 @@ table 50150 "Mould Master"
                   Validate("Glass Weight",Item."Net Weight");
             end;
         }
+        field(34; Scrapped; Boolean)
+        {
+            Caption = 'Scrapped';
+        }
 
 
 

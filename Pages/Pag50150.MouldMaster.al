@@ -81,6 +81,10 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Remarks.', Comment = '%';
                 }
+                 field(Scrapped; Rec.Scrapped)
+                {
+                    ToolTip = 'Specifies the value of the Scrapped.', Comment = '%';
+                }
             }
         }
     }
