@@ -144,24 +144,44 @@ page 50152 "Mould Master Card"
     }
     actions
     {
-        area(Processing)
+        area(Navigation)
         {
-            action(ModuleGearLiftReport)
+            group(Action12)
             {
-                ApplicationArea = All;
-                Caption = 'Print Module Gear Lift';
-                Image = Report; // Optional icon
-                trigger OnAction()
-                var
-                    MyReportID: Integer;
-                    DocumentNo: Record "Mould Master";
-                begin
-                    MyReportID := Report::MouldGearLiftReport;
-                    DocumentNo.Reset();
-                    DocumentNo.SetRange("PO No.", Rec."PO No.");
-                    If DocumentNo.FindSet() then
-                        Report.RunModal(MyReportID, true, false, DocumentNo);
-                end;
+                Caption = 'New';
+                Image = New;
+                action(ModuleGearLiftReport)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Print Module Gear Lift';
+                    Image = Report; // Optional icon
+                    Promoted = true;
+                    PromotedIsBig = true;
+                    PromotedCategory = New;
+                    trigger OnAction()
+                    var
+                        MyReportID: Integer;
+                        DocumentNo: Record "Mould Master";
+                    begin
+                        MyReportID := Report::MouldGearLiftReport;
+                        DocumentNo.Reset();
+                        DocumentNo.SetRange("PO No.", Rec."PO No.");
+                        If DocumentNo.FindSet() then
+                            Report.RunModal(MyReportID, true, false, DocumentNo);
+                    end;
+                }
+                action(MouldRoutingLink)
+                {
+                    ApplicationArea = Suite;
+                    Caption = 'Mould Tool Linkage';
+                    Image = List; // Optional icon
+                    ToolTip = 'Mould Tool Linkage';
+                    RunObject = Page "Mould Tool Linkage";
+                    RunPageLink = "PO No." = field("PO No.");
+                    Promoted = true;
+                    PromotedIsBig = true;
+                    PromotedCategory = New;
+                }
             }
         }
     }

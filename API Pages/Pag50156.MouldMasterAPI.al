@@ -138,6 +138,10 @@ page 50156 "MouldMaster API"
                 {
                     Caption = 'Mould Category';
                 }
+                field(scrapped; Rec.Scrapped)
+                {
+                    Caption = 'Scrapped';
+                }
             }
         }
     }
