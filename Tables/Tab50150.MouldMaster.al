@@ -20,7 +20,6 @@ table 50150 "Mould Master"
         field(5; "Glass Weight"; Decimal)
         {
             Caption = 'Glass Weight';
-            Editable = false;
             BlankZero = true;
             trigger OnValidate()
             var
@@ -246,6 +245,10 @@ table 50150 "Mould Master"
         field(34; Scrapped; Boolean)
         {
             Caption = 'Scrapped';
+        }
+         field(40; "Mould Status"; enum "Mould Status")
+        {
+            Caption = 'Mould Status';
         }
 
 

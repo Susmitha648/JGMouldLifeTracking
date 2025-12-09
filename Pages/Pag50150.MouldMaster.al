@@ -85,6 +85,10 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Scrapped.', Comment = '%';
                 }
+                 field("Mould Status"; Rec."Mould Status")
+                {
+                    ToolTip = 'Specifies the value of the Mould Status.', Comment = '%';
+                }
             }
         }
     }

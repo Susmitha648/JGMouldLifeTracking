@@ -142,6 +142,10 @@ page 50156 "MouldMaster API"
                 {
                     Caption = 'Scrapped';
                 }
+                field(mouldStatus; Rec."Mould Status")
+                {
+                    Caption = 'Mould Status';
+                }
             }
         }
     }

@@ -131,6 +131,10 @@ page 50152 "Mould Master Card"
                 {
                     ToolTip = 'Specifies the value of the Mould Category field.', Comment = '%';
                 }
+                field("Mould Status"; Rec."Mould Status")
+                {
+                    ToolTip = 'Specifies the value of the Mould Status field.', Comment = '%';
+                }
                 field(Process; Rec.Process)
                 {
                     ToolTip = 'Specifies the value of the Process field.', Comment = '%';
