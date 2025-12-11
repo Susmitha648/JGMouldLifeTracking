@@ -19,10 +19,11 @@ table 50154 "Mould Tool Linkage"
             Caption = 'Routings';
             TableRelation = "Routing Header"."No.";
         }
+         
     }
     keys
     {
-        key(PK; "PO No.")
+        key(PK; "PO No.","Mould Type")
         {
             Clustered = true;
         }

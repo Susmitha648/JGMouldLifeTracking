@@ -4,10 +4,10 @@ enum 50152 Process
     
     value(0; PB)
     {
-        Caption = 'PB';
+        Caption = 'Blank Mould';
     }
     value(1; BB)
     {
-        Caption = 'BB';
+        Caption = 'Blow Mould';
     }
 }

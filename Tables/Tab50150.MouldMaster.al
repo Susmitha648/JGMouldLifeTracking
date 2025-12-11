@@ -33,6 +33,8 @@ table 50150 "Mould Master"
                     Validate("Gobcut/MLD", MouldCategoryMatrix."Gobcut/MLD");
                     "Mould Category" := MouldCategoryMatrix.Category;
                 end;
+                
+                Validate("Weight Growth", "Current Weight Production" - "Glass Weight");
             end;
         }
         field(7; "Received Date"; Date)
