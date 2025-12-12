@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "6b9b3057-27a4-4846-8674-41034a18509d",
+      "name": "QC",
+      "version": "1.0.0.0",
+      "publisher": "Comm-IT"
+    }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "26.0.0.0",

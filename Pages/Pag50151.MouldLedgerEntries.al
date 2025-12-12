@@ -16,21 +16,29 @@ page 50151 "Mould Ledger Entries"
                 {
                     ToolTip = 'Specifies the value of the Entry No. field.', Comment = '%';
                 }
-                field("Type"; Rec."Type")
+                field("Process"; Rec."Process")
                 {
-                    ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Process field.', Comment = '%';
                 }
                 field("Mould ID"; Rec."PO No.")
                 {
                     ToolTip = 'Specifies the value of the Mould ID field.', Comment = '%';
                 }
+                field("Job No."; Rec."Job No.")
+                {
+                    ToolTip = 'Specifies the value of the Job No. field.', Comment = '%';
+                }
                 field("Posting Date"; Rec."Posting Date")
                 {
                     ToolTip = 'Specifies the value of the Posting Date field.', Comment = '%';
                 }
-                field("Machine Center"; Rec."Machine Center")
+                field("Work Shift"; Rec."Work Shift")
                 {
-                    ToolTip = 'Specifies the value of the Machine Center field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Work Shift field.', Comment = '%';
+                }
+                field("Work Center"; Rec."Work Center")
+                {
+                    ToolTip = 'Specifies the value of the Work Center field.', Comment = '%';
                 }
                 field("Production Order No."; Rec."Production Order No.")
                 {

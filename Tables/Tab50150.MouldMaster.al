@@ -52,7 +52,7 @@ table 50150 "Mould Master"
             FieldClass = FlowField;
             DecimalPlaces = 0 : 5;
             Editable = false;
-            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Type = Const("Blow & Blow (BB)")));
+            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Process = Const("BB")));
         }
         field(11; "Blow Mould Life (Balance)"; Decimal)
         {
@@ -144,7 +144,7 @@ table 50150 "Mould Master"
             FieldClass = FlowField;
             DecimalPlaces = 0 : 5;
             Editable = false;
-            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Type = Const("Press & Blow (PB)")));
+            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Process = Const(PB)));
         }
         field(22; "Blank Mould Life (Balance)"; Decimal)
         {

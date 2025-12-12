@@ -11,9 +11,9 @@ table 50151 "Mould Ledger Entries"
             Caption = 'Entry No.';
             //AutoIncrement = true;
         }
-        field(2; "Type"; Enum "Mould Usage")
+        field(2; "Process"; Enum Process)
         {
-            Caption = 'Type';
+            Caption = 'Process';
         }
         field(3; "PO No."; Code[20])
         {
@@ -24,10 +24,21 @@ table 50151 "Mould Ledger Entries"
         {
             Caption = 'Posting Date';
         }
-        field(5; "Machine Center"; Code[20])
+        field(5; "Work Center"; Code[20])
         {
-            Caption = 'Machine Center';
-            TableRelation = "Machine Center"."No.";
+            Caption = 'Work Center';
+            trigger OnLookup()
+            var
+                GeneralLegderSetup: Record "General Ledger Setup";
+                DimensionValue: Record "Dimension Value";
+            begin
+                GeneralLegderSetup.Get();
+                DimensionValue.Reset();
+                DimensionValue.SetRange("Dimension Code", GeneralLegderSetup."Shortcut Dimension 8 Code");
+                If DimensionValue.FindSet() then;
+                if Page.RunModal(537, DimensionValue) = Action::LookupOK then
+                    "Work Center" := DimensionValue.Code;
+            end;
         }
         field(6; "Production Order No."; Code[20])
         {
@@ -44,9 +55,19 @@ table 50151 "Mould Ledger Entries"
                 MouldMaster: Record "Mould Master";
                 RemainingQty: Decimal;
             begin
-                
+
 
             end;
+        }
+        field(8; "Work Shift"; Code[20])
+        {
+            Caption = 'Work Shift';
+            TableRelation = "Work Shift".Code;
+        }
+        field(9; "Job No."; Code[20])
+        {
+            Caption = 'Job No.';
+            TableRelation = Item."No.";
         }
     }
     keys
@@ -56,5 +77,5 @@ table 50151 "Mould Ledger Entries"
             Clustered = true;
         }
     }
-    
+
 }

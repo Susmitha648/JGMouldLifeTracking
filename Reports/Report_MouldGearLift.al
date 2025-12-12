@@ -81,8 +81,8 @@ report 50150 MouldGearLiftReport
             {
                 DataItemLink = "PO No." = field("PO No.");
                 DataItemLinkReference = "Mould Master";
-                DataItemTableView = sorting("PO No.") where("Type" = filter("Press & Blow (PB)"));
-                column(Machine_Center; "Machine Center")
+                DataItemTableView = sorting("PO No.") where("Process" = filter(PB));
+                column(Machine_Center; "Work Center")
                 {
                 }
                 column(Posting_Date; Format("Posting Date"))
@@ -100,7 +100,7 @@ report 50150 MouldGearLiftReport
                 column(BPM; '')
                 {
                 }
-                column(Machine; "Machine Center")
+                column(Machine; "Work Center")
                 {
                 }
                 column(DateOn; Format("Posting Date"))
