@@ -10,7 +10,7 @@ table 50154 "Mould Tool Linkage"
             Caption = 'PO No.';
             TableRelation = "Mould Master"."PO No.";
         }
-        field(2; "Mould Type"; Enum Process)
+        field(2; "Mould Type"; Enum "Mould Type")
         {
             Caption = 'Mould Type';
         }
@@ -19,11 +19,10 @@ table 50154 "Mould Tool Linkage"
             Caption = 'Routings';
             TableRelation = "Routing Header"."No.";
         }
-         
     }
     keys
     {
-        key(PK; "PO No.","Mould Type")
+        key(PK; "PO No.","Mould Type","Routings")
         {
             Clustered = true;
         }

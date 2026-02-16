@@ -33,7 +33,7 @@ table 50150 "Mould Master"
                     Validate("Gobcut/MLD", MouldCategoryMatrix."Gobcut/MLD");
                     "Mould Category" := MouldCategoryMatrix.Category;
                 end;
-                
+
                 Validate("Weight Growth", "Current Weight Production" - "Glass Weight");
             end;
         }
@@ -52,7 +52,7 @@ table 50150 "Mould Master"
             FieldClass = FlowField;
             DecimalPlaces = 0 : 5;
             Editable = false;
-            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Process = Const("BB")));
+            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), "Type" = Const("Blow Mould")));
         }
         field(11; "Blow Mould Life (Balance)"; Decimal)
         {
@@ -135,8 +135,18 @@ table 50150 "Mould Master"
         field(20; "Work Center"; Text[100])
         {
             Caption = 'Work Center';
-            TableRelation = "Work Center".Name;
-            ValidateTableRelation = false;
+            trigger OnLookup()
+            var
+                GeneralLegderSetup: Record "General Ledger Setup";
+                DimensionValue: Record "Dimension Value";
+            begin
+                GeneralLegderSetup.Get();
+                DimensionValue.Reset();
+                DimensionValue.SetRange("Dimension Code", GeneralLegderSetup."Shortcut Dimension 8 Code");
+                If DimensionValue.FindSet() then;
+                if Page.RunModal(537, DimensionValue) = Action::LookupOK then
+                    "Work Center" := DimensionValue.Code;
+            end;
         }
         field(21; "Blank Mould Life (Usage)"; Decimal)
         {
@@ -144,7 +154,7 @@ table 50150 "Mould Master"
             FieldClass = FlowField;
             DecimalPlaces = 0 : 5;
             Editable = false;
-            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Process = Const(PB)));
+            CalcFormula = Sum("Mould Ledger Entries".Quantity where("PO No." = field("PO No."), Type = Const("Blank Mould")));
         }
         field(22; "Blank Mould Life (Balance)"; Decimal)
         {
@@ -238,21 +248,24 @@ table 50150 "Mould Master"
             TableRelation = Item."No.";
             trigger OnValidate()
             var
-              Item : Record Item;
+                Item: Record Item;
             begin
-               If Item.Get("Job No.") then
-                  Validate("Glass Weight",Item."Net Weight");
+                If Item.Get("Job No.") then
+                    Validate("Glass Weight", Item."Net Weight");
             end;
         }
         field(34; Scrapped; Boolean)
         {
             Caption = 'Scrapped';
         }
-         field(40; "Mould Status"; enum "Mould Status")
+        field(40; "Mould Status"; enum "Mould Status")
         {
             Caption = 'Mould Status';
         }
-
+        field(41; "Shared Job"; Text[250])
+        {
+            Caption = 'Shared Job';
+        }
 
 
 

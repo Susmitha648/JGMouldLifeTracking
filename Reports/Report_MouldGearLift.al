@@ -81,7 +81,7 @@ report 50150 MouldGearLiftReport
             {
                 DataItemLink = "PO No." = field("PO No.");
                 DataItemLinkReference = "Mould Master";
-                DataItemTableView = sorting("PO No.") where("Process" = filter(PB));
+                DataItemTableView = sorting("PO No.") where("Type" = filter("Blank Mould"));
                 column(Machine_Center; "Work Center")
                 {
                 }

@@ -16,9 +16,9 @@ page 50151 "Mould Ledger Entries"
                 {
                     ToolTip = 'Specifies the value of the Entry No. field.', Comment = '%';
                 }
-                field("Process"; Rec."Process")
+                field("Type"; Rec."Type")
                 {
-                    ToolTip = 'Specifies the value of the Process field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Type field.', Comment = '%';
                 }
                 field("Mould ID"; Rec."PO No.")
                 {

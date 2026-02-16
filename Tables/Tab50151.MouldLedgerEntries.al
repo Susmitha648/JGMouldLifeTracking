@@ -11,9 +11,9 @@ table 50151 "Mould Ledger Entries"
             Caption = 'Entry No.';
             //AutoIncrement = true;
         }
-        field(2; "Process"; Enum Process)
+        field(2; "Type"; Enum "Mould Type")
         {
-            Caption = 'Process';
+            Caption = 'Type';
         }
         field(3; "PO No."; Code[20])
         {

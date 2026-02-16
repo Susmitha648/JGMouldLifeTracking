@@ -63,7 +63,10 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Machine Center field.', Comment = '%';
                 }
-
+                field("Shared Job"; Rec."Shared Job")
+                {
+                    ToolTip = 'Specifies the value of the Shared Job field.', Comment = '%';
+                }
                 field("Mould Model"; Rec."Mould Model")
                 {
                     ToolTip = 'Specifies the value of the Mould Model field.', Comment = '%';
