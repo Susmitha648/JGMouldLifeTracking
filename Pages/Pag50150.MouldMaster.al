@@ -31,27 +31,27 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Blow Mould Life (Expected) field.', Comment = '%';
                 }
-                 field("Blank Mould Life (Balance)"; Rec."Blank Mould Life (Balance)")
+                field("Blank Mould Life (Balance)"; Rec."Blank Mould Life (Balance)")
                 {
                     ToolTip = 'Specifies the value of the Blank Mould Life (Balance) field.', Comment = '%';
                 }
-                 field("Blow Mould Life (Balance)"; Rec."Blow Mould Life (Balance)")
+                field("Blow Mould Life (Balance)"; Rec."Blow Mould Life (Balance)")
                 {
                     ToolTip = 'Specifies the value of the Blow Mould Life (Balance) field.', Comment = '%';
                 }
-                 field("Blank Mould Life (Usage)"; Rec."Blank Mould Life (Usage)")
+                field("Blank Mould Life (Usage)"; Rec."Blank Mould Life (Usage)")
                 {
                     ToolTip = 'Specifies the value of the Blank Mould Life (Usage) field.', Comment = '%';
                 }
-                 field("Blow Mould Life (Usage)"; Rec."Blow Mould Life (Usage)")
+                field("Blow Mould Life (Usage)"; Rec."Blow Mould Life (Usage)")
                 {
                     ToolTip = 'Specifies the value of the Blow Mould Life (Usage) field.', Comment = '%';
                 }
-                 field("Blank Mould Life Usage %"; Rec."Blank Mould Life Usage %")
+                field("Blank Mould Life Usage %"; Rec."Blank Mould Life Usage %")
                 {
                     ToolTip = 'Specifies the value of the Blank Mould Life Usage % field.', Comment = '%';
                 }
-                 field("Blow Mould Life Usage %"; Rec."Blow Mould Life Usage %")
+                field("Blow Mould Life Usage %"; Rec."Blow Mould Life Usage %")
                 {
                     ToolTip = 'Specifies the value of the Blow Mould Life Usage % field.', Comment = '%';
                 }
@@ -84,11 +84,11 @@ page 50150 "Mould Master"
                 {
                     ToolTip = 'Specifies the value of the Remarks.', Comment = '%';
                 }
-                 field(Scrapped; Rec.Scrapped)
+                field(Scrapped; Rec.Scrapped)
                 {
                     ToolTip = 'Specifies the value of the Scrapped.', Comment = '%';
                 }
-                 field("Mould Status"; Rec."Mould Status")
+                field("Mould Status"; Rec."Mould Status")
                 {
                     ToolTip = 'Specifies the value of the Mould Status.', Comment = '%';
                 }
@@ -116,11 +116,58 @@ page 50150 "Mould Master"
                         Report.RunModal(MyReportID, true, false, DocumentNo);
                 end;
             }
+            action(UpdateRoutingLink)
+            {
+                ApplicationArea = All;
+                Caption = 'Update Tool Linkage';
+                Image = UpdateDescription; // Optional icon
+                trigger OnAction()
+                var
+                    RoutingLinkage: Record "Mould Tool Linkage";
+                    RoutingLinkageTemp: Record "Mould Tool Linkage" temporary;
+                begin
+                    RoutingLinkageTemp.DeleteAll();
+                    Rec."Shared Job" := '';
+                    RoutingLinkage.Reset();
+                    RoutingLinkage.SetRange("PO No.", Rec."PO No.");
+                    If RoutingLinkage.FindSet() then
+                        repeat
+                            RoutingLinkageTemp.Reset();
+                            RoutingLinkageTemp.SetRange("PO No.", Rec."PO No.");
+                            RoutingLinkageTemp.SetRange(Routings, RoutingLinkage.Routings);
+                            If Not RoutingLinkageTemp.FindFirst() then begin
+                                RoutingLinkageTemp.Init();
+                                RoutingLinkageTemp."PO No." := Rec."PO No.";
+                                RoutingLinkageTemp."Mould Type" := RoutingLinkage."Mould Type";
+                                RoutingLinkageTemp.Routings := RoutingLinkage.Routings;
+                                RoutingLinkageTemp.Insert();
+                                Rec."Shared Job" += RoutingLinkage.Routings + ',';
+                                
+                            end;
+                        until RoutingLinkage.Next() = 0;
+                    If Rec."Shared Job" <> '' then
+                        Rec."Shared Job" := COPYSTR(Rec."Shared Job", 1, STRLEN(Rec."Shared Job") - 1);
+                    Rec.Modify();
+                end;
+            }
         }
     }
     trigger OnOpenPage()
     begin
         Rec.CalcFields("Blank Mould Life (Usage)", "Blow Mould Life (Usage)");
     end;
-    
+    trigger OnAfterGetRecord()
+    begin
+        If Rec."Blank Mould Life (Expected)" <> 0 then begin
+            Rec.CalcFields("Blank Mould Life (Usage)");
+            Rec."Blank Mould Life Usage %" := (Rec."Blank Mould Life (Usage)" / Rec."Blank Mould Life (Expected)") * 100;
+            Rec."Blank Mould Life (Balance)" := Rec."Blank Mould Life (Expected)" - Rec."Blank Mould Life (Usage)";
+        end;
+        If Rec."Blow Mould Life (Expected)" <> 0 then begin
+            Rec.CalcFields("Blow Mould Life (Usage)");
+            Rec."Blow Mould Life Usage %" := (Rec."Blow Mould Life (Usage)" / Rec."Blow Mould Life (Expected)") * 100;
+            Rec."Blow Mould Life (Balance)" := Rec."Blow Mould Life (Expected)" - Rec."Blow Mould Life (Usage)";
+        end;
+    end;
+
 }

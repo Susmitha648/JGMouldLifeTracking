@@ -111,6 +111,10 @@ page 50152 "Mould Master Card"
                 {
                     ToolTip = 'Specifies the value of the Work Center field.', Comment = '%';
                 }
+                field("Shared Job"; Rec."Shared Job")
+                {
+                    ToolTip = 'Specifies the value of the Shared Job field.', Comment = '%';
+                }
                 field(Manufacturer; Rec.Manufacturer)
                 {
                     ToolTip = 'Specifies the value of the Manufacturer field.', Comment = '%';

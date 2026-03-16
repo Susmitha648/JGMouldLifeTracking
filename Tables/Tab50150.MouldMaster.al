@@ -262,7 +262,7 @@ table 50150 "Mould Master"
         {
             Caption = 'Mould Status';
         }
-        field(41; "Shared Job"; Text[250])
+        field(41; "Shared Job"; Text[500])
         {
             Caption = 'Shared Job';
         }
